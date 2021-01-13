@@ -1,11 +1,11 @@
 {
-  "name": "TODO",
-  "description": "TODO",
+  "name": "cozy-penny",
+  "description": "Budget Tracker",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
-    "export": "sapper export --legacy",
+    "export": "rm -rf ./dist && sapper export --legacy && mv __sapper__/export ./dist",
     "start": "node __sapper__/build"
   },
   "dependencies": {

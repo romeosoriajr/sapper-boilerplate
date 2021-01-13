@@ -7,8 +7,6 @@ import { onMount } from 'svelte';
 let isLoading = true;
 
 onMount(() => {
-		netlifyIdentity.init();
-		isLoading = false;
 		netlifyIdentity.on('login', async (u) => {
 			if ($user) {
 				user.set(u);
@@ -17,6 +15,7 @@ onMount(() => {
 			netlifyIdentity.close();
 		})
 	
+		netlifyIdentity.init();
 		netlifyIdentity.on('logout',() => {
 				user.set(null);
 			})
