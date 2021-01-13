@@ -6,25 +6,23 @@ import { onMount } from 'svelte';
 
 let isLoading = true;
 
-onMount(() => {
-		netlifyIdentity.on('login', async (u) => {
-			if ($user) {
-				user.set(u);
-			}
+onMount(async () => {
+	netlifyIdentity.on('login', async (u) => {
+		if (!$user) {
+				user.set({...u});
+		}
+		netlifyIdentity.close();
+	})
 
-			netlifyIdentity.close();
+	netlifyIdentity.init();
+	netlifyIdentity.on('logout',() => {
+			user.set(null);
 		})
-	
-		netlifyIdentity.init();
-		netlifyIdentity.on('logout',() => {
-				user.set(null);
-			})
 
-		isLoading = false;
+	isLoading = false;
 	})
 
 export let segment;
-
 	
 </script>
 
