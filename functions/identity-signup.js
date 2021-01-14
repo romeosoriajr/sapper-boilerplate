@@ -8,11 +8,11 @@ const CREATE_USER = `
 	}
 `;
 
-exports.handler = async (_, context) => {
+exports.handler = async (e) => {
 
 	var inputData = {
-		netlify: 'dummy-netlify',
-		email: 'dummy@email'
+		netlify: e.event,
+		email: 'blahblah@blah.com'
 	}
 
 	const { data, errors } = await sendMutation(CREATE_USER, inputData);
