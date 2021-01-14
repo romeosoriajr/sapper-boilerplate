@@ -1,0 +1,9 @@
+type User {
+  email: String!
+  netlify: String!
+}
+
+type Query {
+  getUser(netlify: String!): User!
+}
+
