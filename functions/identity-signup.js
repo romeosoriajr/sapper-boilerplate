@@ -10,14 +10,14 @@ const CREATE_USER = `
 
 exports.handler = async (e) => {
 	const payload = JSON.parse(e.body);
-	const { user } = payload;
+	const user = payload.user;
 
 	var inputData = {
-		netlify: user.sub,
+		netlify: 'netlify-blah',
 		email: user.email
 	}
 
-	const { data, errors } = await sendMutation(CREATE_USER, inputData);
+	const { errors } = await sendMutation(CREATE_USER, inputData);
 
 	if (errors) {
 		return {
@@ -28,6 +28,6 @@ exports.handler = async (e) => {
 
 	return {
 		statusCode: 200,
-		body: JSON.stringify({ data })
+		body: '{}'
 	}
 }
