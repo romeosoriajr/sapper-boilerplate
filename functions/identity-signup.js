@@ -9,17 +9,10 @@ const CREATE_USER = `
 `;
 
 exports.handler = async (_, context) => {
-	var { user } = context.clientContext;
-	if (!user) {
-		return {
-			statusCode: 500,
-			body: JSON.stringify({ error: 'You must be logged in' })
-		}
-	}
 
 	var inputData = {
-		netlify: user.sub,
-		email: user.email
+		netlify: 'dummy-netlify',
+		email: 'dummy@email'
 	}
 
 	const { data, errors } = await sendMutation(CREATE_USER, inputData);
