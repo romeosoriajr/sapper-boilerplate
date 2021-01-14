@@ -8,9 +8,9 @@ const CREATE_USER = `
 	}
 `;
 
-exports.handler = async (e, context) => {
-	var { identity, user } = context.clientContext;
-	if (!identity || !user) {
+exports.handler = async (_, context) => {
+	var { user } = context.clientContext;
+	if (!user) {
 		return {
 			statusCode: 500,
 			body: JSON.stringify({ error: 'You must be logged in' })
