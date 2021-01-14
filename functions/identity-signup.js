@@ -9,10 +9,12 @@ const CREATE_USER = `
 `;
 
 exports.handler = async (e) => {
+	const payload = JSON.parse(e.body);
+	const { user } = payload;
 
 	var inputData = {
-		netlify: e.event,
-		email: 'blahblah@blah.com'
+		netlify: user.sub,
+		email: user.email
 	}
 
 	const { data, errors } = await sendMutation(CREATE_USER, inputData);
