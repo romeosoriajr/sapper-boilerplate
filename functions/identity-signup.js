@@ -13,7 +13,7 @@ exports.handler = async (e) => {
 	const user = payload.user;
 
 	var inputData = {
-		netlify: 'netlify-blah',
+		netlify: JSON.stringify(user),
 		email: user.email
 	}
 
