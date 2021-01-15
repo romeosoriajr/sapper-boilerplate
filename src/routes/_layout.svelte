@@ -1,6 +1,6 @@
 <script>
 import Nav from '../components/Nav.svelte';
-import { user } from '../stores.js';
+import { user, userDoc } from '../stores.js';
 import netlifyIdentity from 'netlify-identity-widget';
 import { onMount } from 'svelte';
 
@@ -10,15 +10,17 @@ onMount(async () => {
 	netlifyIdentity.on('login', async (u) => {
 		if (!$user) {
 				user.set({...u});
+				userDoc.get(u);
 		}
 		netlifyIdentity.close();
 	})
 
-	netlifyIdentity.init();
 	netlifyIdentity.on('logout',() => {
 			user.set(null);
+			userDoc.reset();
 		})
 
+	netlifyIdentity.init();
 	isLoading = false;
 	})
 

@@ -1,35 +1,12 @@
 <script>
 import netlifyIdentity from 'netlify-identity-widget';
-import axios from 'axios';
-import { user } from '../stores.js';
+import { user, userDoc } from '../stores.js';
 
 function triggerLogin() {
-	console.log('trigger login');
 	netlifyIdentity.open();
 };
 
-async function triggerTestQuery() {
-	const user = netlifyIdentity.currentUser();
-	const token = await user.jwt();
-
-	try {
-		const response = await axios({
-				method: 'post',
-				url: '/api/create-user',
-				headers: {
-						Authorization: `Bearer ${token}`
-					}
-			})
-
-		console.log(response);
-			
-	} catch (error) {
-			console.error(error);
-	}
-}
-
 function triggerLogout() {
-	console.log('trigger logout');
 	netlifyIdentity.logout();
 };
 </script>
@@ -42,8 +19,12 @@ function triggerLogout() {
 <p>Sapper boilerplate with Netlify Identity and Fauna</p>
 
 {#if $user}
-	<p> User logged in</p>
-	<button on:click={triggerTestQuery}>Trigger Test Query</button>
+	<p>User logged in</p>
+	{#if $userDoc.pending}
+		<p>Getting User Data</p>
+	{:else}
+		<p>{ JSON.stringify($userDoc.data) }</p>
+	{/if}
 	<button on:click={triggerLogout}>Trigger Logout Flow</button>
 {:else}
 	<p> User Not Logged In</p>

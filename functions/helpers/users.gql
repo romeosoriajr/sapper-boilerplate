@@ -1,6 +1,6 @@
 type User {
-  email: String!
-  ntlid: String!
+  email: String! @unique
+  ntlid: String! @unique
 }
 
 type Query {
