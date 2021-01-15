@@ -1,9 +1,9 @@
 type User {
   email: String!
-  netlify: String!
+  ntlid: String!
 }
 
 type Query {
-  getUser(netlify: String!): User!
+  getUser(ntlid: String!): User!
 }
 

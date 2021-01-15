@@ -1,8 +1,8 @@
 const sendMutation = require('./helpers/send-query');
 
 const CREATE_USER = `
-	mutation($netlify: String!, $email: String!) {
-		createUser(data: {email: $email, netlify: $netlify}) {
+	mutation($ntlid: String!, $email: String!) {
+		createUser(data: {email: $email, ntlid: $ntlid}) {
 			email
     }
 	}
@@ -18,7 +18,7 @@ exports.handler = async (e, context) => {
 	}
 
 	var inputData = {
-		netlify: user.sub,
+		ntlid: user.sub,
 		email: user.email
 	}
 
