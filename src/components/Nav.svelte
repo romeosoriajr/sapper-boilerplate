@@ -1,5 +1,6 @@
 <script>
-	export let segment;
+import { user } from '../stores.js';
+export let segment;
 </script>
 
 <style>
@@ -26,21 +27,6 @@
 		float: left;
 	}
 
-	[aria-current] {
-		position: relative;
-		display: inline-block;
-	}
-
-	[aria-current]::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
-
 	a {
 		text-decoration: none;
 		padding: 1em 0.5em;
@@ -50,7 +36,9 @@
 
 <nav>
 	<ul>
-		<li><a aria-current="{segment === undefined ? 'page' : undefined}" href=".">home</a></li>
-		<li><a aria-current="{segment === 'about' ? 'page' : undefined}" href="about">about</a></li>
+		<li><a href=".">home</a></li>
+		{#if $user.loggedIn}
+			<li><a href="about">about</a></li>
+		{/if}
 	</ul>
 </nav>
